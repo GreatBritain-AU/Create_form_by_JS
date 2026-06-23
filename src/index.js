@@ -11,8 +11,8 @@ function createInput(type, name, placeholder){
 function createInputLabel(type, id, name){
     const input = document.createElement('input');
     input.type = type;
-    input.name = id;
-    input.placeholder = name;
+    input.id = id;
+    input.name = name;
     return input;
 }
 
@@ -103,6 +103,7 @@ const button = document.createElement('button');
 button.setAttribute('type', 'submit');
 button.textContent = 'Create account';
 mainForm.append(button);
+
 
 
 
