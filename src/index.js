@@ -16,6 +16,35 @@ function createInputLabel(type, id, name){
     return input;
 }
 
+const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let emailValidError = null;
+
+function checkEmailValidation(event){
+    const emailInputField = event.target.value;
+
+    if(!emailReg.test(emailInputField)){
+
+        if(!emailValidError){
+            emailValidError = document.createElement('p');
+            emailValidError.textContent = 'You entered an incorrect email address';
+            emailValidError.style.backgroundColor = 'red';
+            emailValidError.style.color = 'white';
+
+            const InputsGroup = document.querySelector('.input-part');
+            InputsGroup.after(emailValidError);
+        }
+    } else{
+        if(emailValidError){
+            emailValidError.remove();
+            emailValidError = null;
+        }
+    }
+}
+
+
+
+
+
 //Top part
 const mainForm = document.createElement('form');
 document.body.append(mainForm);
@@ -104,6 +133,6 @@ button.setAttribute('type', 'submit');
 button.textContent = 'Create account';
 mainForm.append(button);
 
+//Event Handlers
 
-
-
+emailInput.addEventListener('blur', checkEmailValidation);
