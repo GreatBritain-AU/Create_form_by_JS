@@ -16,6 +16,8 @@ function createInputLabel(type, id, name){
     return input;
 }
 
+const errorMessage = 'You entered an incorrect email address or password';
+
 const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let emailValidError = null;
 
@@ -26,7 +28,7 @@ function checkEmailValidation(event){
 
         if(!emailValidError){
             emailValidError = document.createElement('p');
-            emailValidError.textContent = 'You entered an incorrect email address';
+            emailValidError.textContent = errorMessage;
             emailValidError.style.backgroundColor = 'red';
             emailValidError.style.color = 'white';
 
@@ -41,8 +43,27 @@ function checkEmailValidation(event){
     }
 }
 
+let passwordValidError = null;
+function checkPasswValidation(event){
+    const passwConf = event.target.value;
+    const passInp = document.querySelector('input[name="passw"]');
+        if(passwConf !== passInp.value){
+            if(!passwordValidError){
+                passwordValidError = document.createElement('p');
+                passwordValidError.textContent = errorMessage;
+                passwordValidError.style.backgroundColor = 'red';
+                passwordValidError.style.color = 'white';
 
-
+                const InputsGroup = document.querySelector('.input-part');
+                InputsGroup.after(passwordValidError);
+            }
+        } else{
+            if(passwordValidError){
+                passwordValidError.remove();
+                passwordValidError = null;
+            }
+        }    
+}
 
 
 //Top part
@@ -136,3 +157,4 @@ mainForm.append(button);
 //Event Handlers
 
 emailInput.addEventListener('blur', checkEmailValidation);
+pwcInput.addEventListener('blur', checkPasswValidation);
