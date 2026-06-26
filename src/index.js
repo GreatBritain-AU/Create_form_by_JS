@@ -17,11 +17,10 @@ function createInputLabel(type, id, name){
 }
 
 const errorMessage = 'You entered an incorrect email address or password';
-
-const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 let emailValidError = null;
 
 function checkEmailValidation(event){
+    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emailInputField = event.target.value;
 
     if(!emailReg.test(emailInputField)){
@@ -32,8 +31,8 @@ function checkEmailValidation(event){
             emailValidError.style.backgroundColor = 'red';
             emailValidError.style.color = 'white';
 
-            const InputsGroup = document.querySelector('.input-part');
-            InputsGroup.after(emailValidError);
+            const inputsGroup = document.querySelector('.input-part');
+            inputsGroup.after(emailValidError);
         }
     } else{
         if(emailValidError){
@@ -45,17 +44,17 @@ function checkEmailValidation(event){
 
 let passwordValidError = null;
 function checkPasswValidation(event){
-    const passwConf = event.target.value;
+    const passwConfInp = document.querySelector('input[name="passw_con"]');
     const passInp = document.querySelector('input[name="passw"]');
-        if(passwConf !== passInp.value){
+        if(passwConfInp.value !== passInp.value){
             if(!passwordValidError){
                 passwordValidError = document.createElement('p');
                 passwordValidError.textContent = errorMessage;
                 passwordValidError.style.backgroundColor = 'red';
                 passwordValidError.style.color = 'white';
 
-                const InputsGroup = document.querySelector('.input-part');
-                InputsGroup.after(passwordValidError);
+                const inputsGroup = document.querySelector('.input-part');
+                inputsGroup.after(passwordValidError);
             }
         } else{
             if(passwordValidError){
@@ -158,3 +157,4 @@ mainForm.append(button);
 
 emailInput.addEventListener('blur', checkEmailValidation);
 pwcInput.addEventListener('blur', checkPasswValidation);
+pwInput.addEventListener('blur', checkPasswValidation);
