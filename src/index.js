@@ -1,5 +1,20 @@
 'use strict';
 
+class Person{
+    constructor(data){
+       Object.assign(this, data);
+    }
+}
+
+function createPerson() {
+    const form = document.querySelector("form");
+    const data = Object.fromEntries(new FormData(form));
+    delete data.passw;
+    delete data.passw_con;
+
+    return new Person(data);
+}
+
 function createInput(type, name, placeholder){
     const input = document.createElement('input');
     input.type = type;
@@ -158,3 +173,10 @@ mainForm.append(button);
 emailInput.addEventListener('blur', checkEmailValidation);
 pwcInput.addEventListener('blur', checkPasswValidation);
 pwInput.addEventListener('blur', checkPasswValidation);
+button.addEventListener('click', function (event) {
+    event.preventDefault();
+    const lastNameValue = lnInput.value;
+
+    const person = createPerson();
+    localStorage.setItem(lastNameValue, JSON.stringify(person));
+});
